@@ -9,7 +9,7 @@ Deux façons de noter ce que j'aime manger :
 - **Des plats entiers** (ex: *poulet riz*, *pâtes carbonara*) quand je sais déjà exactement ce que je veux faire.
 - **Des aliments séparés** (ex: *poulet*, *riz*, *pommes de terre*), classés par catégorie (viande, féculent, légume...), pour composer un repas à la carte en piochant une viande + un accompagnement selon l'envie du moment.
 
-Les plats et aliments peuvent être **liés entre eux** : par exemple relier *frites* et *pommes de terre*, ou *carbonara* et *bolognaise* dans une même famille "pâtes". Ça permet de naviguer d'une idée à une autre facilement, sans tout retenir par cœur.
+Les plats et aliments peuvent être **liés entre eux** : par exemple relier *frites* et *pommes de terre*, ou les plâts *carbonara* et *bolognaise* liés à l'aliment "pâtes". Ça permet de naviguer d'une idée à une autre plus facilement.
 
 ## Fonctionnement
 
