@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Mes Repas</title>
+  <title>MiamMiam</title>
 
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
@@ -20,7 +20,7 @@
 <body>
 
   <header>
-    <h1>Mes Repas</h1>
+    <h1>MiamMiam</h1>
     <nav>
       <button data-view="plats" class="nav-btn active">Plats</button>
       <button data-view="items" class="nav-btn">Aliments</button>
@@ -40,12 +40,12 @@
     <!-- Vue Aliments -->
     <section id="view-items" class="view">
       <form id="form-item" class="add-form">
-        <input type="text" id="input-item-nom" placeholder="Nom de l'aliment (ex: Pommes de terre)" required>
+        <input type="text" id="input-item-nom" placeholder="Nom de l'aliment (ex: Pâtes)" required>
         <select id="input-item-categorie">
           <option value="viande">Viande</option>
           <option value="feculent">Féculent</option>
+          <option value="fruit">Fruit</option>
           <option value="legume">Légume</option>
-          <option value="autre">Autre</option>
         </select>
         <button type="submit">Ajouter</button>
       </form>
