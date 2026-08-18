@@ -1,0 +1,152 @@
+/* ====================================================
+   Style minimal de test — à personnaliser entièrement
+   ==================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, system-ui, sans-serif;
+  background: #f4f4f6;
+  color: #1e1e2e;
+  padding-bottom: 40px;
+  /* évite que le contenu passe sous l'encoche/barre du bas en mode standalone */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+header {
+  background: #1e1e2e;
+  color: white;
+  padding: 16px 20px;
+  padding-top: calc(16px + env(safe-area-inset-top));
+}
+
+header h1 {
+  margin: 0 0 12px 0;
+  font-size: 1.4rem;
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.nav-btn.active {
+  background: white;
+  color: #1e1e2e;
+  font-weight: 600;
+}
+
+main {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.view {
+  display: none;
+}
+
+.view.active {
+  display: block;
+}
+
+.add-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.add-form input,
+.add-form select {
+  flex: 1;
+  min-width: 150px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.add-form button {
+  padding: 10px 16px;
+  border: none;
+  background: #1e1e2e;
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.liste li {
+  background: white;
+  padding: 14px 16px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.liste li .badge {
+  font-size: 0.75rem;
+  background: #eee;
+  padding: 2px 8px;
+  border-radius: 10px;
+  color: #555;
+}
+
+.liste li .btn-suppr {
+  background: none;
+  border: none;
+  color: #c0392b;
+  font-size: 1.1rem;
+  padding: 0 4px;
+}
+
+#btn-retour {
+  background: none;
+  border: none;
+  color: #1e1e2e;
+  font-size: 1rem;
+  padding: 0;
+  margin-bottom: 16px;
+}
+
+#detail-contenu .liaisons {
+  margin-top: 20px;
+}
+
+#detail-contenu .liaison-form {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+#detail-contenu select {
+  flex: 1;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}

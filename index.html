@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Mes Repas</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1e1e2e">
+
+  <!-- Spécifique iOS pour le mode plein écran -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Mes Repas">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Mes Repas</h1>
+    <nav>
+      <button data-view="plats" class="nav-btn active">Plats</button>
+      <button data-view="items" class="nav-btn">Aliments</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Vue Plats -->
+    <section id="view-plats" class="view active">
+      <form id="form-plat" class="add-form">
+        <input type="text" id="input-plat-nom" placeholder="Nom du plat (ex: Poulet riz)" required>
+        <button type="submit">Ajouter</button>
+      </form>
+      <ul id="liste-plats" class="liste"></ul>
+    </section>
+
+    <!-- Vue Aliments -->
+    <section id="view-items" class="view">
+      <form id="form-item" class="add-form">
+        <input type="text" id="input-item-nom" placeholder="Nom de l'aliment (ex: Pommes de terre)" required>
+        <select id="input-item-categorie">
+          <option value="viande">Viande</option>
+          <option value="feculent">Féculent</option>
+          <option value="legume">Légume</option>
+          <option value="autre">Autre</option>
+        </select>
+        <button type="submit">Ajouter</button>
+      </form>
+      <ul id="liste-items" class="liste"></ul>
+    </section>
+
+    <!-- Vue Détail (plat ou aliment sélectionné) -->
+    <section id="view-detail" class="view">
+      <button id="btn-retour">&larr; Retour</button>
+      <h2 id="detail-titre"></h2>
+      <div id="detail-contenu"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
