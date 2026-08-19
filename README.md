@@ -1,4 +1,4 @@
-# Mes Repas
+# MiamMiam
 
 Une petite application web pour lister mes plats et mes aliments préférés, et les relier entre eux — pensée pour ne plus jamais me demander "qu'est-ce que je pourrais bien faire à manger déjà ?".
 
