@@ -6,20 +6,21 @@
   box-sizing: border-box;
 }
 
+:root {
+  --app-bg: #1a1a1a;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, system-ui, sans-serif;
-  background: #f4f4f6;
-  color: #1e1e2e;
-  padding-bottom: 40px;
-  /* évite que le contenu passe sous l'encoche/barre du bas en mode standalone */
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
+  background: var(--app-bg);
+  color: #292b2e;
+  padding-bottom: calc(88px + env(safe-area-inset-bottom));
 }
 
 header {
-  background: #1e1e2e;
-  color: white;
+  background: #111111;
+  color: #ffffff;
   padding: 16px 20px;
   padding-top: calc(16px + env(safe-area-inset-top));
 }
@@ -27,26 +28,14 @@ header {
 header h1 {
   margin: 0 0 12px 0;
   font-size: 1.4rem;
-}
-
-nav {
-  display: flex;
-  gap: 8px;
+  color: #a8c9ad;
 }
 
 .nav-btn {
+  border: 0;
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.3);
-  color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-}
-
-.nav-btn.active {
-  background: white;
-  color: #1e1e2e;
-  font-weight: 600;
+  color: #777783;
+  cursor: pointer;
 }
 
 main {
@@ -75,7 +64,7 @@ main {
   flex: 1;
   min-width: 150px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #b8bbbe;
   border-radius: 8px;
   font-size: 1rem;
 }
@@ -83,8 +72,8 @@ main {
 .add-form button {
   padding: 10px 16px;
   border: none;
-  background: #1e1e2e;
-  color: white;
+  background: #3f4144;
+  color: #ffffff;
   border-radius: 8px;
   font-weight: 600;
 }
@@ -99,10 +88,10 @@ main {
 }
 
 .liste li {
-  background: white;
+  background: #ffffff;
   padding: 14px 16px;
   border-radius: 10px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 3px rgba(41, 43, 46, 0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -111,16 +100,16 @@ main {
 
 .liste li .badge {
   font-size: 0.75rem;
-  background: #eee;
+  background: #c8cbce;
   padding: 2px 8px;
   border-radius: 10px;
-  color: #555;
+  color: #5b5e62;
 }
 
 .liste li .btn-suppr {
   background: none;
   border: none;
-  color: #c0392b;
+  color: #85898e;
   font-size: 1.1rem;
   padding: 0 4px;
 }
@@ -128,7 +117,7 @@ main {
 #btn-retour {
   background: none;
   border: none;
-  color: #1e1e2e;
+  color: #5b5e62;
   font-size: 1rem;
   padding: 0;
   margin-bottom: 16px;
@@ -148,5 +137,45 @@ main {
   flex: 1;
   padding: 8px;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #b8bbbe;
+}
+
+.bottom-nav {
+  position: fixed;
+  z-index: 10;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  background: #111111;
+  box-shadow: 0 -3px 12px rgba(41, 43, 46, 0.08);
+}
+
+.bottom-nav .nav-btn {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  max-width: 150px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  color: #828E85;
+  font-weight: 500;
+}
+
+.bottom-nav .nav-btn.active {
+  color: #a8c9ad;
+  font-weight: 700;
+}
+
+.tab-icon {
+  display: block;
+  width: 28px;
+  height: 28px;
+  background: #a8c9ad;
+  border-radius: 7px;
 }

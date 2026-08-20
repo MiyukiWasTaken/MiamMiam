@@ -34,6 +34,7 @@ function uid() {
 const views = {
   plats: document.getElementById("view-plats"),
   items: document.getElementById("view-items"),
+  course: document.getElementById("view-course"),
   detail: document.getElementById("view-detail"),
 };
 

@@ -7,7 +7,7 @@
 
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#1e1e2e">
+  <meta name="theme-color" content="#3f4144">
 
   <!-- Spécifique iOS pour le mode plein écran -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -21,10 +21,6 @@
 
   <header>
     <h1>MiamMiam</h1>
-    <nav>
-      <button data-view="plats" class="nav-btn active">Plats</button>
-      <button data-view="items" class="nav-btn">Aliments</button>
-    </nav>
   </header>
 
   <main>
@@ -52,6 +48,12 @@
       <ul id="liste-items" class="liste"></ul>
     </section>
 
+    <!-- Vue Liste de course -->
+    <section id="view-course" class="view">
+      <h2>Liste de course</h2>
+      <p>Votre liste de course apparaîtra ici.</p>
+    </section>
+
     <!-- Vue Détail (plat ou aliment sélectionné) -->
     <section id="view-detail" class="view">
       <button id="btn-retour">&larr; Retour</button>
@@ -59,6 +61,21 @@
       <div id="detail-contenu"></div>
     </section>
   </main>
+
+  <nav class="bottom-nav" aria-label="Navigation principale">
+    <button data-view="plats" class="nav-btn active" type="button">
+      <span class="tab-icon" aria-hidden="true"></span>
+      <span>Plats</span>
+    </button>
+    <button data-view="items" class="nav-btn" type="button">
+      <span class="tab-icon" aria-hidden="true"></span>
+      <span>Aliments</span>
+    </button>
+    <button data-view="course" class="nav-btn" type="button">
+      <span class="tab-icon" aria-hidden="true"></span>
+      <span>Liste de course</span>
+    </button>
+  </nav>
 
   <script src="app.js"></script>
 </body>
