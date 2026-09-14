@@ -26,25 +26,11 @@
   <main>
     <!-- Vue Plats -->
     <section id="view-plats" class="view active">
-      <form id="form-plat" class="add-form">
-        <input type="text" id="input-plat-nom" placeholder="Nom du plat (ex: Poulet riz)" required>
-        <button type="submit">Ajouter</button>
-      </form>
       <ul id="liste-plats" class="liste"></ul>
     </section>
 
     <!-- Vue Aliments -->
     <section id="view-items" class="view">
-      <form id="form-item" class="add-form">
-        <input type="text" id="input-item-nom" placeholder="Nom de l'aliment (ex: Pâtes)" required>
-        <select id="input-item-categorie">
-          <option value="viande">Viande</option>
-          <option value="feculent">Féculent</option>
-          <option value="fruit">Fruit</option>
-          <option value="legume">Légume</option>
-        </select>
-        <button type="submit">Ajouter</button>
-      </form>
       <ul id="liste-items" class="liste"></ul>
     </section>
 
@@ -61,6 +47,29 @@
       <div id="detail-contenu"></div>
     </section>
   </main>
+
+  <button id="btn-ajouter" class="add-floating-btn visible" type="button" aria-label="Ajouter un plat ou un aliment">+</button>
+
+  <dialog id="dialog-ajout">
+    <form id="form-ajout" class="dialog-form">
+      <div class="dialog-header">
+        <h2 id="dialog-ajout-titre">Ajouter un plat</h2>
+        <button id="btn-fermer-dialog" class="dialog-close" type="button" aria-label="Fermer">&times;</button>
+      </div>
+      <input type="text" id="input-ajout-nom" placeholder="Nom du plat (ex: Poulet riz)" required>
+      <select id="input-ajout-categorie">
+        <option value="viande">Viande</option>
+        <option value="feculent">Féculent</option>
+        <option value="fruit">Fruit</option>
+        <option value="legume">Légume</option>
+      </select>
+      <label class="photo-input">
+        <span>Photo</span>
+        <input type="file" id="input-ajout-photo" accept="image/*">
+      </label>
+      <button type="submit">Ajouter</button>
+    </form>
+  </dialog>
 
   <nav class="bottom-nav" aria-label="Navigation principale">
     <button data-view="plats" class="nav-btn active" type="button">

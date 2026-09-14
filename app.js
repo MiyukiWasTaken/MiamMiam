@@ -11,8 +11,8 @@ function loadData() {
   const raw = localStorage.getItem(DB_KEY);
   if (raw) return JSON.parse(raw);
   return {
-    plats: [],   // { id, nom }
-    items: [],   // { id, nom, categorie }
+    plats: [],   // { id, nom, photo }
+    items: [],   // { id, nom, categorie, photo }
     liaisons: [] // { id, aId, bId }  -> relie deux items OU deux plats entre eux
   };
 }
@@ -25,6 +25,18 @@ let data = loadData();
 
 function uid() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+}
+
+function readPhoto(fileInput) {
+  const file = fileInput.files[0];
+  if (!file) return Promise.resolve("");
+
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
 }
 
 // ============================================================
@@ -41,6 +53,8 @@ const views = {
 function showView(name) {
   Object.values(views).forEach(v => v.classList.remove("active"));
   views[name].classList.add("active");
+
+  document.getElementById("btn-ajouter").classList.toggle("visible", name === "plats" || name === "items");
 
   document.querySelectorAll(".nav-btn").forEach(btn => {
     btn.classList.toggle("active", btn.dataset.view === name);
@@ -64,7 +78,8 @@ function renderPlats() {
   ul.innerHTML = "";
   data.plats.forEach(plat => {
     const li = document.createElement("li");
-    li.innerHTML = `<span>${plat.nom}</span> <button class="btn-suppr" data-id="${plat.id}">✕</button>`;
+    if (plat.photo) li.style.setProperty("--card-image", `url("${plat.photo}")`);
+    li.innerHTML = `<span class="card-title">${plat.nom}</span><button class="btn-suppr" data-id="${plat.id}" aria-label="Supprimer ${plat.nom}">✕</button>`;
     li.addEventListener("click", (e) => {
       if (e.target.classList.contains("btn-suppr")) return;
       openDetail("plat", plat.id);
@@ -84,7 +99,8 @@ function renderItems() {
   ul.innerHTML = "";
   data.items.forEach(item => {
     const li = document.createElement("li");
-    li.innerHTML = `<span>${item.nom}</span> <span class="badge">${item.categorie}</span> <button class="btn-suppr" data-id="${item.id}">✕</button>`;
+    if (item.photo) li.style.setProperty("--card-image", `url("${item.photo}")`);
+    li.innerHTML = `<span class="card-title">${item.nom}</span><span class="badge">${item.categorie}</span><button class="btn-suppr" data-id="${item.id}" aria-label="Supprimer ${item.nom}">✕</button>`;
     li.addEventListener("click", (e) => {
       if (e.target.classList.contains("btn-suppr")) return;
       openDetail("item", item.id);
@@ -100,26 +116,43 @@ function renderItems() {
 }
 
 // ============================================================
-// Formulaires d'ajout
+// Fenêtre d'ajout
 // ============================================================
 
-document.getElementById("form-plat").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const input = document.getElementById("input-plat-nom");
-  data.plats.push({ id: uid(), nom: input.value.trim() });
-  saveData(data);
-  input.value = "";
-  renderPlats();
+let currentAddType = "plat";
+const dialogAjout = document.getElementById("dialog-ajout");
+const formAjout = document.getElementById("form-ajout");
+const nomAjoutInput = document.getElementById("input-ajout-nom");
+const categorieAjoutInput = document.getElementById("input-ajout-categorie");
+const photoAjoutInput = document.getElementById("input-ajout-photo");
+
+document.getElementById("btn-ajouter").addEventListener("click", () => {
+  currentAddType = document.getElementById("view-items").classList.contains("active") ? "item" : "plat";
+  const isItem = currentAddType === "item";
+  document.getElementById("dialog-ajout-titre").textContent = isItem ? "Ajouter un aliment" : "Ajouter un plat";
+  nomAjoutInput.placeholder = isItem ? "Nom de l'aliment (ex: Pâtes)" : "Nom du plat (ex: Poulet riz)";
+  categorieAjoutInput.hidden = !isItem;
+  dialogAjout.showModal();
+  nomAjoutInput.focus();
 });
 
-document.getElementById("form-item").addEventListener("submit", (e) => {
+document.getElementById("btn-fermer-dialog").addEventListener("click", () => {
+  dialogAjout.close();
+});
+
+formAjout.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const nomInput = document.getElementById("input-item-nom");
-  const catInput = document.getElementById("input-item-categorie");
-  data.items.push({ id: uid(), nom: nomInput.value.trim(), categorie: catInput.value });
+  const photo = await readPhoto(photoAjoutInput);
+  if (currentAddType === "plat") {
+    data.plats.push({ id: uid(), nom: nomAjoutInput.value.trim(), photo });
+    renderPlats();
+  } else {
+    data.items.push({ id: uid(), nom: nomAjoutInput.value.trim(), categorie: categorieAjoutInput.value, photo });
+    renderItems();
+  }
   saveData(data);
-  nomInput.value = "";
-  renderItems();
+  formAjout.reset();
+  dialogAjout.close();
 });
 
 // ============================================================

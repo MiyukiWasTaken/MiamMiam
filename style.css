@@ -8,6 +8,7 @@
 
 :root {
   --app-bg: #1a1a1a;
+  --card-radius: 14px;
 }
 
 body {
@@ -52,66 +53,205 @@ main {
   display: block;
 }
 
-.add-form {
+.photo-input {
   display: flex;
+  align-items: center;
   gap: 8px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
+  min-width: 150px;
+  padding: 9px 10px;
+  border: 1px solid #b8bbbe;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #5b5e62;
+  font-size: 0.9rem;
+  cursor: pointer;
 }
 
-.add-form input,
-.add-form select {
-  flex: 1;
-  min-width: 150px;
-  padding: 10px;
+.photo-input input {
+  min-width: 0;
+  max-width: 115px;
+  font-size: 0.75rem;
+}
+
+.add-floating-btn {
+  position: fixed;
+  z-index: 20;
+  top: calc(14px + env(safe-area-inset-top));
+  right: 16px;
+  display: none;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 50%;
+  background: #a8c9ad;
+  color: #111111;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.add-floating-btn.visible {
+  display: block;
+}
+
+dialog {
+  width: min(420px, calc(100% - 32px));
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.dialog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+}
+
+.dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dialog-header h2 {
+  margin: 0;
+  color: #292b2e;
+  font-size: 1.25rem;
+}
+
+.dialog-form input[type="text"],
+.dialog-form select {
+  width: 100%;
+  min-width: 0;
+  padding: 11px;
   border: 1px solid #b8bbbe;
   border-radius: 8px;
   font-size: 1rem;
 }
 
-.add-form button {
-  padding: 10px 16px;
+.dialog-form select[hidden] {
+  display: none;
+}
+
+.dialog-form > button[type="submit"] {
+  padding: 11px 16px;
   border: none;
+  border-radius: 8px;
   background: #3f4144;
   color: #ffffff;
-  border-radius: 8px;
   font-weight: 600;
 }
 
-.liste {
+.dialog-close {
+  border: 0;
+  background: transparent;
+  color: #5b5e62;
+  cursor: pointer;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+#view-plats .liste,
+#view-items .liste {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
-.liste li {
-  background: #ffffff;
-  padding: 14px 16px;
-  border-radius: 10px;
-  box-shadow: 0 1px 3px rgba(41, 43, 46, 0.08);
+#view-plats .liste li,
+#view-items .liste li {
+  position: relative;
+  isolation: isolate;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex: 1 1 calc(50% - 10px);
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+  min-width: 135px;
+  aspect-ratio: 1;
+  overflow: hidden;
+  padding: 16px 12px 12px;
+  border-radius: var(--card-radius);
+  background-color: #46494c;
+  background-image: var(--card-image, linear-gradient(135deg, #6d7370, #2c2d2e));
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
 
-.liste li .badge {
+#view-plats .liste li::before,
+#view-items .liste li::before {
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 58%;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.82));
+  content: "";
+}
+
+#view-plats .card-title,
+#view-items .card-title {
+  position: relative;
+  z-index: 1;
+  overflow-wrap: anywhere;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.15;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+#view-plats .liste li .badge,
+#view-items .liste li .badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
   font-size: 0.75rem;
-  background: #c8cbce;
+  background: rgba(255, 255, 255, 0.88);
   padding: 2px 8px;
   border-radius: 10px;
   color: #5b5e62;
 }
 
-.liste li .btn-suppr {
-  background: none;
+#view-plats .liste li .btn-suppr,
+#view-items .liste li .btn-suppr {
+  position: absolute;
+  z-index: 2;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
   border: none;
-  color: #85898e;
+  color: #ffffff;
   font-size: 1.1rem;
-  padding: 0 4px;
+  line-height: 1;
+  padding: 0;
+}
+
+@media (min-width: 560px) {
+  #view-plats .liste li,
+  #view-items .liste li {
+    flex-basis: calc(33.333% - 10px);
+  }
 }
 
 #btn-retour {
