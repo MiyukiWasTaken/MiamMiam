@@ -56,21 +56,34 @@ main {
 .photo-input {
   display: flex;
   align-items: center;
-  gap: 8px;
-  min-width: 150px;
-  padding: 9px 10px;
-  border: 1px solid #b8bbbe;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 0;
   border-radius: 8px;
-  background: #ffffff;
-  color: #5b5e62;
+  background: #e3e8e4;
+  color: #3f4144;
   font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
 }
 
 .photo-input input {
-  min-width: 0;
-  max-width: 115px;
-  font-size: 0.75rem;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.photo-input:hover {
+  background: #cbd8ce;
+}
+
+.photo-input:focus-within {
+  outline: 2px solid #a8c9ad;
+  outline-offset: 2px;
 }
 
 .add-floating-btn {
@@ -177,7 +190,7 @@ dialog::backdrop {
   position: relative;
   isolation: isolate;
   display: flex;
-  flex: 1 1 calc(50% - 10px);
+  flex: 0 0 calc(50% - 5px);
   flex-direction: column;
   justify-content: flex-end;
   align-items: stretch;
@@ -211,11 +224,15 @@ dialog::backdrop {
   position: relative;
   z-index: 1;
   overflow-wrap: anywhere;
-  color: #ffffff;
+  color: #a8c9ad;
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.15;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+#detail-titre {
+  color: #a8c9ad;
 }
 
 #view-plats .liste li .badge,
@@ -247,13 +264,6 @@ dialog::backdrop {
   padding: 0;
 }
 
-@media (min-width: 560px) {
-  #view-plats .liste li,
-  #view-items .liste li {
-    flex-basis: calc(33.333% - 10px);
-  }
-}
-
 #btn-retour {
   background: none;
   border: none;
@@ -263,8 +273,209 @@ dialog::backdrop {
   margin-bottom: 16px;
 }
 
+.detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.detail-header h2 {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+#btn-modifier,
+.edit-actions button {
+  padding: 9px 13px;
+  border: 0;
+  border-radius: 8px;
+  background: #a8c9ad;
+  color: #292b2e;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.detail-infos {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.detail-photo {
+  width: 100%;
+  aspect-ratio: 16 / 8;
+  border-radius: var(--card-radius);
+  background-position: center;
+  background-size: cover;
+}
+
+.detail-field h3 {
+  margin: 0 0 5px;
+  color: #a8c9ad;
+  font-size: 0.95rem;
+}
+
+.detail-field p {
+  margin: 0;
+  white-space: pre-wrap;
+  color: #ffffff;
+  line-height: 1.45;
+}
+
+.detail-recipe {
+  padding: 12px;
+  border-left: 3px solid #a8c9ad;
+  background: #252525;
+}
+
+.recipe-list {
+  margin: 0;
+  padding: 12px 12px 12px 30px;
+  border-left: 3px solid #a8c9ad;
+  background: #252525;
+  color: #ffffff;
+  line-height: 1.5;
+}
+
+.rating {
+  color: #f2c14e;
+  font-size: 1.45rem;
+}
+
+.star.empty {
+  color: #666b6d;
+}
+
+.star.half {
+  background: linear-gradient(90deg, #f2c14e 50%, #666b6d 50%);
+  background-clip: text;
+  color: transparent;
+  -webkit-background-clip: text;
+}
+
+.detail-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.edit-name-row {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.edit-name-row > input,
+.detail-edit-form select,
+.detail-edit-form textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 11px;
+  border: 1px solid #b8bbbe;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #292b2e;
+  font: inherit;
+}
+
+.edit-name-row > input {
+  flex: 1;
+}
+
+.edit-photo-button {
+  flex: 0 0 auto;
+}
+
+.detail-edit-form > label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.detail-edit-form textarea {
+  resize: vertical;
+}
+
+.edit-rating {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.edit-rating legend {
+  margin-bottom: 5px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.star-choice {
+  position: relative;
+  display: inline-block;
+  width: 1.6em;
+  height: 1.8em;
+  vertical-align: middle;
+}
+
+.editable-star {
+  position: absolute;
+  inset: 0;
+  color: #666b6d;
+  font-size: 1.8rem;
+  line-height: 1;
+  text-align: center;
+}
+
+.editable-star.full {
+  color: #f2c14e;
+}
+
+.editable-star.half {
+  background: linear-gradient(90deg, #f2c14e 50%, #666b6d 50%);
+  background-clip: text;
+  color: transparent;
+  -webkit-background-clip: text;
+}
+
+.star-half {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: 50%;
+  height: 1.8em;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.star-half:first-child {
+  left: 0;
+}
+
+.star-half:last-child {
+  right: 0;
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.edit-actions button:first-child {
+  background: #d7d9da;
+}
+
 #detail-contenu .liaisons {
   margin-top: 20px;
+}
+
+#detail-contenu .liaisons > strong {
+  color: #a8c9ad;
 }
 
 #detail-contenu .liaison-form {
